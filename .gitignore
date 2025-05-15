@@ -1,0 +1,9 @@
+node_modules
+logs
+deploy
+go.sum
+package-lock.json
+service-account.json
+review-fetcher
+reviews.csv
+.env
