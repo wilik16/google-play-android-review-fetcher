@@ -305,13 +305,18 @@ func main() {
 			continue
 		}
 
+		var device = "Unknown"
+		if review.Comments[0].UserComment.DeviceMetadata != nil {
+			device = review.Comments[0].UserComment.DeviceMetadata.ProductName
+		}
+
 		if existingReview, exists := existingReviews[review.ReviewId]; !exists || !existingReview.Notified {
 			newReview := Review{
 				ReviewID: review.ReviewId,
 				Rating:   rating,
 				Text:     cleanText(review.Comments[0].UserComment.Text),
 				Author:   review.AuthorName,
-				Device:   review.Comments[0].UserComment.DeviceMetadata.ProductName,
+				Device:   device,
 				Date:     time.Unix(review.Comments[0].UserComment.LastModified.Seconds, 0),
 				Notified: false,
 			}
